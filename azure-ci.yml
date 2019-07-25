@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
- vmImage: 'Ubuntu-16.04' //Ĭ��Linux Agent
+ vmImage: 'Ubuntu-16.04' //默认Linux Agent
 
 steps:
 - task: Maven@3
@@ -15,11 +15,11 @@ steps:
    mavenPomFile: 'pom.xml'
    mavenOptions: '-Xmx3072m'
    javaHomeOption: 'JDKVersion'
-   jdkVersionOption: '1.11' // jdk�汾
+   jdkVersionOption: '1.11' // jdk版本
    jdkArchitectureOption: 'x64'
    publishJUnitResults: false
    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-   goals: 'clean package -Dmaven.test.skip=true' // maven����
+   goals: 'clean package -Dmaven.test.skip=true' // maven命令
    
 - task: CopyFiles@2
  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
@@ -34,4 +34,3 @@ steps:
  inputs:
    PathtoPublish: '$(build.artifactstagingdirectory)'
  condition: succeededOrFailed()
-
